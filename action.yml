@@ -1,0 +1,28 @@
+name: "Create a release using molting"
+description: "Bump your project files, create a new changelog entry and generate a release"
+branding:
+  icon: "package"
+  color: "green"
+inputs:
+  project-dir:
+    description: "Location of your project, if checked out to a different directory"
+    required: false
+    default: ${{ github.workspace }}
+  version:
+    description: "The type of semver release to make, one of `patch`, `minor` or `major`. Default: will attempt to auto-detect"
+    required: false
+    default: ""
+  log-level:
+    description: "Log level to use. Default: `warning`"
+    required: false
+    default: "warning"
+runs:
+  using: "composite"
+  steps:
+    - id: Install molting
+      run: pip3 install molting
+      shell: bash
+
+    - id: Run molting to create a new release
+      run: molting ${{ inputs.version }} --project-dir ${{ inputs.project-dir }} --log ${{ inputs.log-level }}
+      shell: bash
