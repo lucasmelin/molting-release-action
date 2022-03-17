@@ -19,10 +19,10 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - id: Install molting
+    - id: install-molting
       run: pip3 install molting
       shell: bash
 
-    - id: Run molting to create a new release
+    - id: create-release
       run: molting ${{ inputs.version }} --project-dir ${{ inputs.project-dir }} --log ${{ inputs.log-level }}
       shell: bash
