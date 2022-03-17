@@ -23,6 +23,12 @@ runs:
       run: pip3 install molting
       shell: bash
 
+    - id: configure-git
+      shell: bash
+      run: |
+        git config user.name "${GITHUB_ACTOR}"
+        git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+
     - id: create-release
       run: molting ${{ inputs.version }} --project-dir ${{ inputs.project-dir }} --log ${{ inputs.log-level }}
       shell: bash
